@@ -688,6 +688,13 @@ int handle__connect(struct mosquitto *context)
 				goto handle_connect_error;
 			}
 		}
+		if (username != NULL) {
+			for (int i = 0 ; i < strlen(username) ; i++) {
+				if (username[i] == ':') {
+					username[i] = '-';
+				}
+			}
+		}
 	}else{
 		if(context->protocol == mosq_p_mqtt311 || context->protocol == mosq_p_mqtt31){
 			if(password_flag){
